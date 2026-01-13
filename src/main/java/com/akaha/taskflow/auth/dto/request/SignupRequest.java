@@ -1,4 +1,4 @@
-package com.akaha.taskflow.auth.dto;
+package com.akaha.taskflow.auth.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Email;

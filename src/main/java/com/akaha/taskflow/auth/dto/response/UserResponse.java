@@ -1,4 +1,4 @@
-package com.akaha.taskflow.auth.dto;
+package com.akaha.taskflow.auth.dto.response;
 
 import com.akaha.taskflow.auth.model.User;
 

@@ -1,8 +1,11 @@
 package com.akaha.taskflow.auth.controller;
 
-import com.akaha.taskflow.auth.dto.SignupRequest;
-import com.akaha.taskflow.auth.dto.UserResponse;
+import com.akaha.taskflow.auth.dto.request.LoginRequest;
+import com.akaha.taskflow.auth.dto.request.SignupRequest;
+import com.akaha.taskflow.auth.dto.response.LoginResponse;
+import com.akaha.taskflow.auth.dto.response.UserResponse;
 import com.akaha.taskflow.auth.model.User;
+import com.akaha.taskflow.auth.service.AuthService;
 import com.akaha.taskflow.auth.service.UserService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -20,9 +23,11 @@ public class UserController {
     public static final Logger log =  LoggerFactory.getLogger(UserController.class);
 
     private final UserService userService;
+    private final AuthService authService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService,  AuthService authService) {
         this.userService = userService;
+        this.authService = authService;
     }
 
 
@@ -47,5 +52,15 @@ public class UserController {
         }
     }
 
-
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request){
+        try {
+            log.info(request.email() + " sign-in");
+            User user = authService.login(request);
+            return ResponseEntity.status(HttpStatus.OK).body(LoginResponse.from(user));
+        }catch (Exception e){
+            log.error("Login failed {}", e.getMessage());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 }
