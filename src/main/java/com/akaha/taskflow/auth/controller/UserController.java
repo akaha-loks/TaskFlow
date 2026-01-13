@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 @RestController
 public class UserController {
 
@@ -26,7 +26,7 @@ public class UserController {
     }
 
 
-    @GetMapping
+    @GetMapping("/users")
     public ResponseEntity<List<UserResponse>> getAllUsers() {
         List<UserResponse> users = userService.findAllUsers()
                 .stream()
