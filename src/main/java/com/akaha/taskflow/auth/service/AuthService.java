@@ -25,7 +25,7 @@ public class AuthService {
                 request.password(),
                 user.getPassword()
         )){
-            throw new IllegalStateException();
+            throw new InvalidCredentialsException();
         }
 
         return user;
