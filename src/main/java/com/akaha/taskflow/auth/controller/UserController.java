@@ -8,6 +8,10 @@ import com.akaha.taskflow.auth.model.User;
 import com.akaha.taskflow.auth.service.AuthService;
 import com.akaha.taskflow.auth.security.JwtService;
 import com.akaha.taskflow.auth.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +23,7 @@ import java.util.List;
 
 @RequestMapping("/api/auth")
 @RestController
+@Tag(name = "User", description = "Методы для регистрации и входа")
 public class UserController {
 
     public static final Logger log =  LoggerFactory.getLogger(UserController.class);
@@ -43,6 +48,11 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
+    @Operation(summary = "Регистрация пользователя", description = "Создает нового пользователя")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Пользователь успешно зарегистрирован"),
+            @ApiResponse(responseCode = "400", description = "Неверные данные")
+    })
     @PostMapping("/sign-up")
     public ResponseEntity<UserResponse> signUp(@Valid @RequestBody SignupRequest request){
         try {
@@ -55,6 +65,11 @@ public class UserController {
         }
     }
 
+    @Operation(summary = "Вход пользователя", description = "Возвращает JWT токен при успешном входе")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Успешный вход"),
+            @ApiResponse(responseCode = "400", description = "Неверные учетные данные")
+    })
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request){
         try {
