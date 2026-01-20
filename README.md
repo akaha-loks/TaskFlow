@@ -19,9 +19,10 @@ java 17.x
 
 2. Скачать проект
 git clone https://github.com/akaha-loks/TaskFlow.git
+Переходим в папку проекта:
 cd TaskFlow
 
-3. Запуск базы данных (Docker)
+4. Запуск базы данных (Docker)
 В корне проекта лежит docker-compose.yml.
 
 docker compose up -d
