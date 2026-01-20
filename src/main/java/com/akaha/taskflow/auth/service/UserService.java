@@ -1,6 +1,7 @@
 package com.akaha.taskflow.auth.service;
 
-import com.akaha.taskflow.auth.dto.SignupRequest;
+import com.akaha.taskflow.auth.dto.request.LoginRequest;
+import com.akaha.taskflow.auth.dto.request.SignupRequest;
 import com.akaha.taskflow.auth.exception.EmailAlreadyExistsException;
 import com.akaha.taskflow.auth.exception.UsernameAlreadyExistsException;
 import com.akaha.taskflow.auth.model.User;
