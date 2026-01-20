@@ -29,13 +29,12 @@ public class JwtService {
     }
 
     public Long extractUserId(String token){
-        return Long.valueOf(
-                Jwts.parser()
-                        .verifyWith(Keys.hmacShaKeyFor(secret.getBytes()))
-                        .build()
-                        .parseSignedClaims(token)
-                        .getPayload()
-                        .getSubject()
-        );
+        String sub = Jwts.parser()
+                .verifyWith(Keys.hmacShaKeyFor(secret.getBytes()))
+                .build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .getSubject();
+        return Long.valueOf(sub);
     }
 }
